@@ -25,20 +25,18 @@ var job = new CronJob(cronvalue, function() {
 			console.log(err);
 			return;
 		}
-		console.log("done",tokens)
+		console.log("Authentication done",tokens)
 		var analytics = google.analytics('v3');
 		queryData(analytics,function(err,data){
 			convertoJSON(data,function(newdata){
-				console.log("data ",JSON.stringify(newdata, null, 4));
 				db.addreport(newdata,function(err,data){
 					if(err) throw err;
 					else
-						console.log("data==========",data);
+						console.log("data :",data);
 				})
 			})
 		});
 	});
-   	console.log("hello")
   }, null,
   true /* Start the job right now */
 );
